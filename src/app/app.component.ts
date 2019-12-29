@@ -1,12 +1,22 @@
-import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   genders = ['male', 'female'];
   signupForm : FormGroup;
+
+  ngOnInit() {
+    //should initialize before rendering
+    this.signupForm = new FormGroup({
+      'username' : new FormControl(null),  //we can set the default value, validators, async validators  
+      'email' : new FormControl(null),
+      'gender' : new FormControl('male')
+    });
+  }
+
 }
