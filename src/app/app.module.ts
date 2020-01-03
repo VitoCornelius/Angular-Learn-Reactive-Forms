@@ -18,6 +18,6 @@ import { ProjectComponent } from './project/project.component';
     ReactiveFormsModule, //TODO add this 
   ],
   providers: [],
-  bootstrap: [ProjectComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

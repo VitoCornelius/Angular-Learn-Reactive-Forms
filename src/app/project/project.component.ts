@@ -23,7 +23,8 @@ export class ProjectComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.projectForm)
+    console.log(this.projectForm);
+    //this.projectForm.reset();
   }
 
   syncValidator(control : FormControl) : {[s:string]:boolean} {

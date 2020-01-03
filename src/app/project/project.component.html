@@ -27,6 +27,7 @@
                     <span *ngIf="!projectForm.get('mail').valid && projectForm.get('mail').touched"
                     class="help-block">
                         <span *ngIf="projectForm.get('mail').errors?.required">Please input a mail</span>
+                        <span *ngIf="projectForm.get('mail').errors?.email">Mail is invalid</span>
                         <span *ngIf="projectForm.get('mail').errors?.emailForbidden">This mail cannot be test@test.pl</span>
                     </span>
                 </div>
@@ -36,6 +37,9 @@
                       <option *ngFor="let status of statuses">{{status}}</option>
                     </select>
                 </div>
+                <span 
+                *ngIf="!projectForm.valid && projectForm.touched" 
+                class="help-block">The form is invalid</span>
                 <button class="btn btn-primary" type="submit">Submit</button>
             </form>
         </div>
