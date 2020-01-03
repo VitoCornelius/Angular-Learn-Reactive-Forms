@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-project',
@@ -15,8 +16,8 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit() {
     this.projectForm = new FormGroup({
-      'name' : new FormControl("please input name", [Validators.required]),
-      'mail' : new FormControl("rafal@test.pl", [Validators.email, Validators.required]),
+      'name' : new FormControl("please input name", [Validators.required, this.syncValidator]),
+      'mail' : new FormControl("rafal@test.pl", [Validators.email, Validators.required], this.asyncValidator),
       'status' : new FormControl(this.statuses[0])
     })
   }
@@ -25,12 +26,24 @@ export class ProjectComponent implements OnInit {
     console.log(this.projectForm)
   }
 
-  syncValidator(){
-
+  syncValidator(control : FormControl) : {[s:string]:boolean} {
+    if (control.value === 'Test'){
+      return {'nameForbidden' : true}
+    }
+    return null;
   }
 
-  asyncValidator(){
-    
+  asyncValidator(control : FormControl) : Promise<any> | Observable<any> {
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (control.value === 'test@test.pl'){
+          resolve({'emailForbidden' : true})
+        } else {
+          resolve(null);
+        }
+      } ,1500)
+    })
+    return promise;
   }
 
 }

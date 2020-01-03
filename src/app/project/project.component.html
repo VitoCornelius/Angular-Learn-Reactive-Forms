@@ -12,7 +12,8 @@
                     >
                     <span *ngIf="!projectForm.get('name').valid && projectForm.get('name').touched"
                     class="help-block">
-                        Invalid name! 
+                        <span *ngIf="projectForm.get('name').errors['required']">Please input a name</span>
+                        <span *ngIf="projectForm.get('name').errors['nameForbidden']">This name cannot be 'Test'</span>
                     </span>
                 </div>
                 <div class="form-group">
@@ -25,7 +26,8 @@
                     >
                     <span *ngIf="!projectForm.get('mail').valid && projectForm.get('mail').touched"
                     class="help-block">
-                        Invalid mail! 
+                        <span *ngIf="projectForm.get('mail').errors?.required">Please input a mail</span>
+                        <span *ngIf="projectForm.get('mail').errors?.emailForbidden">This mail cannot be test@test.pl</span>
                     </span>
                 </div>
                 <div class="form-group">
